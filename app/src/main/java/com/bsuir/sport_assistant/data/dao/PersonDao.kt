@@ -8,7 +8,7 @@ import com.bsuir.sport_assistant.domain.models.Person
 @Dao
 interface PersonDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun addPerson(person: Person): Long
 
 }

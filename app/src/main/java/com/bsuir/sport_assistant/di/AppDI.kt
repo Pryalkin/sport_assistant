@@ -61,13 +61,13 @@ val appModule = module {
         UserDatabase.getDatabase(get()).userDao()
     }
     factory<PersonDao> {
-        PersonDatabase.getDatabase(get()).personDao()
+        UserDatabase.getDatabase(get()).personDao()
     }
     factory<PlaceDao> {
-        PlaceDatabase.getDatabase(get()).placeDao()
+        UserDatabase.getDatabase(get()).placeDao()
     }
     factory<AuthDao> {
-        AuthDatabase.getDatabase(get()).authDao()
+        UserDatabase.getDatabase(get()).authDao()
     }
 
 }

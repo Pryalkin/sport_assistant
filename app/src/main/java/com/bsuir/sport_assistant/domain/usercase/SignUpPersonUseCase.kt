@@ -10,8 +10,9 @@ class SignUpPersonUseCase(private val userRepository: UserRepository){
                 patronymic: String,
                 dateOfBirth: String
     ): Long {
-        val person = Person(id = 0L, surname = surname, name = name, patronymic = patronymic, dateOfBirth = dateOfBirth)
-        return userRepository.savePerson(person)
+        val person = Person(surname = surname, name = name, patronymic = patronymic, dateOfBirth = dateOfBirth)
+        val id = userRepository.savePerson(person)
+        return id
     }
 
 }

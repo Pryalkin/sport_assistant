@@ -26,7 +26,8 @@ class UserRepositoryImpl(private val personDao: PersonDao,
     }
 
     override fun savePerson(person: Person): Long {
-        return personDao.addPerson(person)
+        val id = personDao.addPerson(person)
+        return id
     }
 
     override fun savePlace(place: Place): Long {

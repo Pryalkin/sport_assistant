@@ -4,13 +4,23 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.bsuir.sport_assistant.data.dao.AuthDao
+import com.bsuir.sport_assistant.data.dao.PersonDao
+import com.bsuir.sport_assistant.data.dao.PlaceDao
 import com.bsuir.sport_assistant.data.dao.UserDao
+import com.bsuir.sport_assistant.domain.models.Auth
+import com.bsuir.sport_assistant.domain.models.Person
+import com.bsuir.sport_assistant.domain.models.Place
 import com.bsuir.sport_assistant.domain.models.User
 
-@Database(entities = [User::class], version = 1, exportSchema = false)
+@Database(entities = [User::class, Person::class, Place::class, Auth::class], version = 1)
 abstract class UserDatabase : RoomDatabase() {
 
     abstract fun userDao(): UserDao
+    abstract fun placeDao(): PlaceDao
+    abstract fun personDao(): PersonDao
+    abstract fun authDao(): AuthDao
+
 
     companion object {
         @Volatile
@@ -25,8 +35,8 @@ abstract class UserDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     UserDatabase::class.java,
-                    "user_database"
-                ).build()
+                    "test_database"
+                ).fallbackToDestructiveMigration().build()
                 INSTANCE = instance
                 return instance
             }
