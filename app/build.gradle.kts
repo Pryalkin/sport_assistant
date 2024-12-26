@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("kotlin-kapt")
 }
 
 android {
@@ -40,6 +41,18 @@ android {
 }
 
 dependencies {
+    // https://mvnrepository.com/artifact/io.insert-koin/koin-android
+    implementation("io.insert-koin:koin-android:4.0.1")
+    implementation(libs.androidx.runtime.livedata)
+    // https://mvnrepository.com/artifact/io.insert-koin/koin-core
+    runtimeOnly("io.insert-koin:koin-core:4.0.1")
+
+    implementation("androidx.room:room-runtime:2.6.1")
+
+    kapt("androidx.room:room-compiler:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+    androidTestImplementation("androidx.room:room-testing:2.6.1")
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

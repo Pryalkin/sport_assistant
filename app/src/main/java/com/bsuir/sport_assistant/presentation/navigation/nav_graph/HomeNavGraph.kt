@@ -1,16 +1,12 @@
-package com.bsuir.sport_assistant.navigation.nav_graph
+package com.bsuir.sport_assistant.presentation.navigation.nav_graph
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
-import androidx.navigation.navArgument
-import com.bsuir.sport_assistant.navigation.DETAIL_ARGUMENT_KEY
-import com.bsuir.sport_assistant.navigation.DETAIL_ARGUMENT_KEY2
-import com.bsuir.sport_assistant.navigation.HOME_ROUTE
-import com.bsuir.sport_assistant.navigation.Screen
-import com.bsuir.sport_assistant.screens.app.MenuScreen
+import com.bsuir.sport_assistant.presentation.navigation.HOME_ROUTE
+import com.bsuir.sport_assistant.presentation.navigation.Screen
+import com.bsuir.sport_assistant.presentation.screen.app.MenuScreen
 
 fun NavGraphBuilder.homeNavGraph(
     navController: NavHostController
@@ -24,6 +20,7 @@ fun NavGraphBuilder.homeNavGraph(
         ){
             MenuScreen(navController = navController)
         }
+        workoutNavGraph(navController = navController)
     }
 
 }

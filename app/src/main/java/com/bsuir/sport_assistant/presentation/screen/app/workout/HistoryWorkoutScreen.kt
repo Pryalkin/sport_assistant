@@ -1,4 +1,4 @@
-package com.bsuir.sport_assistant.screens.auth
+package com.bsuir.sport_assistant.presentation.screen.app.workout
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -12,17 +12,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.bsuir.sport_assistant.navigation.Screen
+import com.bsuir.sport_assistant.presentation.navigation.Screen
 
 @Composable
-fun HelloScreen(navController: NavHostController){
+fun HistoryWorkoutScreen(navController: NavHostController){
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ){
         Text(
             modifier = Modifier.clickable {
-                navController.navigate(route = Screen.Login.route)
+                navController.navigate(route = Screen.Workout.route)
             },
             text = "Hello",
             color = MaterialTheme.colorScheme.primary,
@@ -35,8 +35,8 @@ fun HelloScreen(navController: NavHostController){
 
 @Composable
 @Preview(showBackground = true)
-fun HomeScreenPreview(){
-    HelloScreen(
+fun HistoryWorkoutScreenPreview(){
+    HistoryWorkoutScreen(
         navController = rememberNavController()
     )
 }

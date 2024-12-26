@@ -1,4 +1,4 @@
-package com.bsuir.sport_assistant.screens.auth
+package com.bsuir.sport_assistant.presentation.screen.auth
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -19,16 +19,21 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.bsuir.sport_assistant.navigation.Screen
+import com.bsuir.sport_assistant.presentation.navigation.Screen
+import com.bsuir.sport_assistant.presentation.viewmodel.UserViewModel
 
 @Composable
 fun SingUpAuthScreen(
-    navController: NavHostController
+    navController: NavHostController,
+    viewModel: UserViewModel
 ) {
     val email = remember { mutableStateOf("") }
+    val numberPhone = remember { mutableStateOf("") }
     val password = remember { mutableStateOf("") }
+    val checkPassword = remember { mutableStateOf("") }
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -42,22 +47,24 @@ fun SingUpAuthScreen(
         )
         Spacer(modifier = Modifier.height(16.dp))
         OutlinedTextField(
-            value = email.value,
-            onValueChange = { email.value = it },
+            value = numberPhone.value,
+            onValueChange = { numberPhone.value = it },
             label = { Text("Телефон (+375291112233)") },
-            modifier = Modifier.width(300.dp)
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-        OutlinedTextField(
-            value = email.value,
-            onValueChange = { email.value = it },
-            label = { Text("Пароль") },
             modifier = Modifier.width(300.dp)
         )
         Spacer(modifier = Modifier.height(16.dp))
         OutlinedTextField(
             value = password.value,
             onValueChange = { password.value = it },
+            label = { Text("Пароль") },
+            visualTransformation = PasswordVisualTransformation(),
+            modifier = Modifier.width(300.dp),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        OutlinedTextField(
+            value = checkPassword.value,
+            onValueChange = { checkPassword.value = it },
             label = { Text("Проверка пароля") },
             visualTransformation = PasswordVisualTransformation(),
             modifier = Modifier.width(300.dp),
@@ -66,6 +73,8 @@ fun SingUpAuthScreen(
         Spacer(modifier = Modifier.height(16.dp))
         Button(
             onClick = {
+                viewModel.signUpAuthUserCase(email = email.value, numberPhone = numberPhone.value,
+                    password = password.value, checkPassword = checkPassword.value)
                 navController.navigate(Screen.SignUp.route)
             },
             modifier = Modifier.width(300.dp)
@@ -79,6 +88,7 @@ fun SingUpAuthScreen(
 @Preview(showBackground = true)
 fun SingUpAuthScreenPreview(){
     SingUpAuthScreen(
-        navController = rememberNavController()
+        navController = rememberNavController(),
+        viewModel = viewModel()
     )
 }

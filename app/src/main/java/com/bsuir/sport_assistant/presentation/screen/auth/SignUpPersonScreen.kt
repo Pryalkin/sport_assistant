@@ -1,4 +1,4 @@
-package com.bsuir.sport_assistant.screens.auth
+package com.bsuir.sport_assistant.presentation.screen.auth
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,56 +17,60 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
-import com.bsuir.sport_assistant.navigation.Screen
+import com.bsuir.sport_assistant.presentation.navigation.Screen
+import com.bsuir.sport_assistant.presentation.viewmodel.UserViewModel
+
 
 @Composable
-fun SingUpPlaceScreen(
-    navController: NavHostController
+fun SingUpPersonScreen(
+    navController: NavHostController,
+    viewModel: UserViewModel
 ) {
-    val email = remember { mutableStateOf("") }
-    val password = remember { mutableStateOf("") }
+
+    val surname = remember { mutableStateOf("") }
+    val name = remember { mutableStateOf("") }
+    val patronymic = remember { mutableStateOf("") }
+    val dateOfBirth = remember { mutableStateOf("") }
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
         OutlinedTextField(
-            value = email.value,
-            onValueChange = { email.value = it },
-            label = { Text("Страна") },
+            value = surname.value,
+            onValueChange = { surname.value = it },
+            label = { Text("Фамилия") },
             modifier = Modifier.width(300.dp)
         )
         Spacer(modifier = Modifier.height(16.dp))
         OutlinedTextField(
-            value = email.value,
-            onValueChange = { email.value = it },
-            label = { Text("Город") },
+            value = name.value,
+            onValueChange = { name.value = it },
+            label = { Text("Имя") },
             modifier = Modifier.width(300.dp)
         )
         Spacer(modifier = Modifier.height(16.dp))
         OutlinedTextField(
-            value = email.value,
-            onValueChange = { email.value = it },
-            label = { Text("Улица") },
+            value = patronymic.value,
+            onValueChange = { patronymic.value = it },
+            label = { Text("Отчество") },
             modifier = Modifier.width(300.dp)
         )
         Spacer(modifier = Modifier.height(16.dp))
         OutlinedTextField(
-            value = password.value,
-            onValueChange = { password.value = it },
-            label = { Text("Дом") },
-            visualTransformation = PasswordVisualTransformation(),
+            value = dateOfBirth.value,
+            onValueChange = { dateOfBirth.value = it },
+            label = { Text("Дата рождения") },
             modifier = Modifier.width(300.dp),
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
         )
         Spacer(modifier = Modifier.height(16.dp))
         Button(
             onClick = {
-                navController.navigate(Screen.SignUpAuth.route)
+                viewModel.signUpPersonUserCase(surname = surname.value, name = name.value,
+                    patronymic = patronymic.value, dateOfBirth = dateOfBirth.value)
+                navController.navigate(Screen.SignUpPlace.route)
             },
             modifier = Modifier.width(300.dp)
         ) {
@@ -75,10 +79,12 @@ fun SingUpPlaceScreen(
     }
 }
 
-@Composable
-@Preview(showBackground = true)
-fun SingUpPlaceScreenPreview(){
-    SingUpPlaceScreen(
-        navController = rememberNavController()
-    )
-}
+//@Composable
+//@Preview(showBackground = true)
+//fun SingUpPersonScreenPreview(){
+//    SingUpPersonScreen(
+//        navController = rememberNavController(),
+//        viewModel = viewModel(),
+//        null
+//    )
+//}
